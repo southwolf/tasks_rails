@@ -1,6 +1,6 @@
 # Tasks in Rails
 
-A simple tasks CRUD api server, written in Ruby on Rails
+A simple tasks CRUD api server providing both RESTful and GraphQL API, written in Ruby on Rails
 
 ## Architecture
 
@@ -12,7 +12,7 @@ The Controller acts on model and view. It controls data flow (based on the [rout
 
 The View represents the visualization of data that model contains - in this app, the JSON output.
 
-## API routes
+## RESTful API routes
 
 The routes follows RESTful convention.
 
@@ -24,6 +24,52 @@ The routes follows RESTful convention.
 | PATCH  | /tasks/:id  | tasks#update      |
 | PUT    | /tasks/:id  | tasks#update      |
 | DELETE | /tasks/:id  | tasks#destroy     |
+
+## GraphQL interfaces
+
+GraphQL support via [graphql-ruby](https://github.com/rmosolgo/graphql-ruby)
+
+Supports all CRUD actions. Sample query
+
+```graphql
+query GetTasks() {
+    tasks() {
+        id
+        title
+    }
+}
+
+query GetTask($id: ID!) {
+    task(id: $id) {
+        id
+        title
+    }
+}
+
+mutation CreateTask($title: String!) {
+    createTask(title: $title) {
+        task {
+            id
+            title
+        }
+    }
+}
+
+mutation EditTask($id: ID!, $title: String!) {
+    editTask(id: $id, title: $title) {
+        task {
+            id
+            title
+        }
+    }
+}
+
+mutation DeleteTask($id: ID!) {
+    deleteTask(id: $id) {
+        id
+    }
+}
+```
 
 ## Command Line Interface
 
