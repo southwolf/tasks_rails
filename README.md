@@ -27,7 +27,11 @@ The routes follows RESTful convention.
 
 ## Command Line Interface
 
-The [cli](bin/tasks) provides basic shell commands for API interactions. It requires [jq](https://stedolan.github.io/jq/) for JSON parsing, please install it by
+The [cli](bin/tasks) provides basic shell commands for API interactions.
+
+The default server address is set to `http://localhost:3000/tasks`. Change it as you wish.
+
+It requires [jq](https://stedolan.github.io/jq/) for JSON parsing, please install it by
 
 ```sh
 brew install jq # macOS
@@ -40,3 +44,15 @@ sudo apt-get install jq # Debian or Ubuntu
 ```
 
 Without jq, it falls back to RAW json display.
+
+### Usage
+
+```sh
+    ./bin/tasks -h                  # print help
+    ./bin/tasks                     # list all tasks
+    ./bin/tasks add Hello World     # Add task
+    ./bin/tasks edit 1 Hello        # Edit task
+    ./bin/tasks del 1               # Delete task
+```
+
+![cli screenshot](cli_screenshot.png)
