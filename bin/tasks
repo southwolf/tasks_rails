@@ -7,11 +7,22 @@ function usage() {
   echo -e "\t-h: Print this help"
   echo -e "\twith no arguments: print out tasks list"
   echo -e "\033[1;32mlist\033[0m: list all tasks"
+  echo -e "\033[1;32madd\033[0m \033[1;37mTASK\033[0m: add a task to the list"
+  echo -e "\t  tasks add Year End Performance Review"
 }
 
 #  GET /tasks
 function getTasks() {
   echo "$(curl -s -w '\n' $SERVER_URL)"
+}
+
+# POST /tasks with json {"task": {"title": "Foo barr"} }
+function addTask() {
+  title="$@"
+  echo $(curl --header "Content-Type: application/json" \
+                --request POST -s -w '\n'\
+                --data "{\"task\":{\"title\":\"$title\"}}" \
+                $SERVER_URL)
 }
 
 function tasks() {
@@ -20,6 +31,9 @@ function tasks() {
     getTasks
   elif [ $1 = "-h" ] || [ $1 = "--help" ] || [ $1 = "help" ]; then
     usage
+  elif [ $1 = "add" ]; then
+    shift
+    addTask "$@"
   fi
 }
 
