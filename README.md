@@ -2,6 +2,8 @@
 
 A simple tasks CRUD api server, written in Ruby on Rails
 
+![cli screenshot](cli_screenshot.png)
+
 ## Architecture
 
 A Ruby on Rails application follows the standard MVC pattern.
@@ -54,5 +56,3 @@ Without jq, it falls back to RAW json display.
     ./bin/tasks edit 1 Hello        # Edit task
     ./bin/tasks del 1               # Delete task
 ```
-
-![cli screenshot](cli_screenshot.png)
