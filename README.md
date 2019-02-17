@@ -24,3 +24,7 @@ The routes follows RESTful convention.
 | PATCH  | /tasks/:id  | tasks#update      |
 | PUT    | /tasks/:id  | tasks#update      |
 | DELETE | /tasks/:id  | tasks#destroy     |
+
+## Command Line Interface
+
+The [cli](bin/tasks) provides basic shell commands for API interactions.

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+SERVER_URL="http://localhost:3000/tasks"
+
+function usage() {
+  echo "tasks - a command line interface for Tasks API"
+  echo -e "\t-h: Print this help"
+  echo -e "\twith no arguments: print out tasks list"
+  echo -e "\033[1;32mlist\033[0m: list all tasks"
+}
+
+#  GET /tasks
+function getTasks() {
+  echo "$(curl -s -w '\n' $SERVER_URL)"
+}
+
+function tasks() {
+  # If called without any arguments, list all tasks
+  if [ $# = "0" ] || [ $1 = 'list' ]; then
+    getTasks
+  elif [ $1 = "-h" ] || [ $1 = "--help" ] || [ $1 = "help" ]; then
+    usage
+  fi
+}
+
+tasks $@
