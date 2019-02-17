@@ -7,8 +7,10 @@ function usage() {
   echo -e "\t-h: Print this help"
   echo -e "\twith no arguments: print out tasks list"
   echo -e "\033[1;32mlist\033[0m: list all tasks"
-  echo -e "\033[1;32madd\033[0m \033[1;37mTASK\033[0m: add a task to the list"
-  echo -e "\t  tasks add Year End Performance Review"
+  echo -e "\033[1;32madd \033[1;36mTASK\033[0m: add a task to the list"
+  echo -e "\t  e.g.: tasks add Year End Performance Review"
+  echo -e "\033[1;32medit\033[0m \033[1;37mTASK_ID \033[1;36mTASK\033[0m: edit task"
+  echo -e "\t  e.g.: tasks edit 1 Prepare for interview"
   echo -e "\033[1;32mdel\033[0m \033[1;37mTASK_ID\033[0m: delete task by id"
 }
 
