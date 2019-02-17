@@ -9,6 +9,7 @@ function usage() {
   echo -e "\033[1;32mlist\033[0m: list all tasks"
   echo -e "\033[1;32madd\033[0m \033[1;37mTASK\033[0m: add a task to the list"
   echo -e "\t  tasks add Year End Performance Review"
+  echo -e "\033[1;32mdel\033[0m \033[1;37mTASK_ID\033[0m: delete task by id"
 }
 
 #  GET /tasks
@@ -20,9 +21,20 @@ function getTasks() {
 function addTask() {
   title="$@"
   format "$(curl --header "Content-Type: application/json" \
-                --request POST -s -w '\n'\
-                --data "{\"task\":{\"title\":\"$title\"}}" \
-                $SERVER_URL)"
+                 --request POST -s -w '\n'\
+                 --data "{\"task\":{\"title\":\"$title\"}}" \
+                 $SERVER_URL)"
+}
+
+# DELETE /tasks/:id
+function delTask() {
+  status_code="$(curl -s -o /dev/null -w "%{http_code}" --request DELETE $SERVER_URL/$1)"
+
+  if [ $status_code = "204" ]; then
+    echo "Done!"
+  else
+    echo "Error! $status_code"
+  fi
 }
 
 # Format output with jq if it exists, or fall back to raw JSON output
@@ -43,6 +55,8 @@ function tasks() {
   elif [ $1 = "add" ]; then
     shift
     addTask "$@"
+  elif [ $1 = "del" ]; then
+    delTask $2
   fi
 }
 
