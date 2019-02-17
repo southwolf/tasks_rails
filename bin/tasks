@@ -13,16 +13,25 @@ function usage() {
 
 #  GET /tasks
 function getTasks() {
-  echo "$(curl -s -w '\n' $SERVER_URL)"
+  format "$(curl -s -w '\n' $SERVER_URL)"
 }
 
 # POST /tasks with json {"task": {"title": "Foo barr"} }
 function addTask() {
   title="$@"
-  echo $(curl --header "Content-Type: application/json" \
+  format "$(curl --header "Content-Type: application/json" \
                 --request POST -s -w '\n'\
                 --data "{\"task\":{\"title\":\"$title\"}}" \
-                $SERVER_URL)
+                $SERVER_URL)"
+}
+
+# Format output with jq if it exists, or fall back to raw JSON output
+function format() {
+  if [ -x "$(command -v jq)" ]; then
+    echo "$1" | jq -r 'if type=="array" then .[]|[.id,.title] | @tsv else [.id,.title] | @tsv end'
+  else
+    echo "$1"
+  fi
 }
 
 function tasks() {

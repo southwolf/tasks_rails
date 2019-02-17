@@ -27,4 +27,16 @@ The routes follows RESTful convention.
 
 ## Command Line Interface
 
-The [cli](bin/tasks) provides basic shell commands for API interactions.
+The [cli](bin/tasks) provides basic shell commands for API interactions. It requires [jq](https://stedolan.github.io/jq/) for JSON parsing, please install it by
+
+```sh
+brew install jq # macOS
+```
+
+OR
+
+```sh
+sudo apt-get install jq # Debian or Ubuntu
+```
+
+Without jq, it falls back to RAW json display.
