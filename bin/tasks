@@ -19,7 +19,7 @@ function getTasks() {
 
 # POST /tasks with json {"task": {"title": "Foo barr"} }
 function addTask() {
-  title="$@"
+  title=$@
   format "$(curl --header "Content-Type: application/json" \
                  --request POST -s -w '\n'\
                  --data "{\"task\":{\"title\":\"$title\"}}" \
@@ -37,12 +37,24 @@ function delTask() {
   fi
 }
 
+# PUT /tasks/:id
+function editTask() {
+  id=$1
+  shift
+  title=$@
+  
+  format "$(curl --header "Content-Type: application/json" \
+                 --request PUT -s -w '\n'\
+                 --data "{\"task\":{\"title\":\"$title\"}}" \
+                 $SERVER_URL/$id)"
+}
+
 # Format output with jq if it exists, or fall back to raw JSON output
 function format() {
   if [ -x "$(command -v jq)" ]; then
-    echo "$1" | jq -r 'if type=="array" then .[]|[.id,.title] | @tsv else [.id,.title] | @tsv end'
+    echo $1 | jq -r 'if type=="array" then .[]|[.id,.title] | @tsv else [.id,.title] | @tsv end'
   else
-    echo "$1"
+    echo $1
   fi
 }
 
@@ -54,9 +66,12 @@ function tasks() {
     usage
   elif [ $1 = "add" ]; then
     shift
-    addTask "$@"
+    addTask $@
   elif [ $1 = "del" ]; then
     delTask $2
+  elif [ $1 = "edit" ]; then
+    shift
+    editTask $@
   fi
 }
 
