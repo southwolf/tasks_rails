@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: Project Plan
+  title: Data Migration
   done: false
 
 two:
-  title: Data Migration
+  title: Project Plan
   done: true
