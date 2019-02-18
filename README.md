@@ -23,7 +23,7 @@ so you do not have to worry about many low level details, such as *database inde
 Rails follows the REST convention so you can build a RESTful API in just one second
 
 ```sh
-rails new scaffold task
+rails g scaffold task
 ```
 
 and it gives you everything you need - ORM, resources based routes and controllers, HTTP status code in the right way.
