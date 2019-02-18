@@ -123,7 +123,8 @@ Without jq, it falls back to RAW json display.
 
 ## Roadmap
 
-1. Adding authentication(JWT token, Warden) and authorization(Pundit/cancancan)
-2. Adding Kubernetes deployment script(helm)
-3. Use Continuous Integration (CircleCI/Docker CI/Heroku) to do automatic deployment
-4. Switch to Redis for distributed service
+1. Logging changes to file(using observer pattern) and database(with paper_trail gem). (**Done**)
+2. Adding authentication(JWT token, Warden) and authorization(Pundit/cancancan)
+3. Adding Kubernetes deployment script(helm)
+4. Use Continuous Integration (CircleCI/Docker CI/Heroku) to do automatic deployment
+5. Switch to Redis for distributed service
