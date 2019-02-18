@@ -4,6 +4,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.0'
 
 gem 'graphql', '~> 1.9.2'
+gem 'paper_trail', '~> 10.2.0'
+gem 'rails-observers', '~> 0.1.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.0.beta1'
 # Use sqlite3 as the database for Active Record
