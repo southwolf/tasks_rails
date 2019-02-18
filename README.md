@@ -14,6 +14,24 @@ The Controller acts on model and view. It controls data flow (based on the [rout
 
 The View represents the visualization of data that model contains - in this app, the JSON output.
 
+### Why choosing current stack
+
+Ruby is the most programmer friendly language and [Ruby on Rails](https://rubyonrails.org/) is the best tool to build a quick prototype or an MVP IMHO.
+It compresses(encapsulates) all the concepts and liberates productivity from the grasp of complexity,
+so you do not have to worry about many low level details, such as *database index*, *connection pool*,  *XML configurations*, *object life cycle*, etc.
+
+Rails follows the REST convention so you can build a RESTful API in just one second
+
+```sh
+rails new scaffold task
+```
+
+and it gives you everything you need - ORM, resources based routes and controllers, HTTP status code in the right way.
+
+And it's easy to build a GraphQL layer along with RESTful API.
+
+This app is using SQLite3, an embedded database to minimize the effort of deployment, but we can also switch to PostgreSQL/MySQL/MongoDB/Redis easily.
+
 ## RESTful API routes
 
 The routes follows RESTful convention.
@@ -102,3 +120,10 @@ Without jq, it falls back to RAW json display.
     ./bin/tasks edit 1 Hello        # Edit task
     ./bin/tasks del 1               # Delete task
 ```
+
+## Roadmap
+
+1. Adding authentication(JWT token, Warden) and authorization(Pundit/cancancan)
+2. Adding Kubernetes deployment script(helm)
+3. Use Continuous Integration (CircleCI/Docker CI/Heroku) to do automatic deployment
+4. Switch to Redis for distributed service
